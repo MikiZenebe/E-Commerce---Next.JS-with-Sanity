@@ -14,6 +14,7 @@ import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
 import { CartWrapper } from "../styles/CartStyle";
 import { Quantity } from "../styles/DetailStyle";
+import getStripe from "../lib/getStripe";
 
 function Cart() {
   const cartRef = useRef();
@@ -22,14 +23,24 @@ function Cart() {
     totalQuantity,
     cartItems,
     setShowCart,
-    decQty,
-    incQty,
-    qty,
     onAdd,
     onRemove,
     onRemoveCard,
-    toggleCartItemQuantity,
   } = useStateContext();
+
+  //Payment -- Fetch from getStripe file
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
+    const res = await fetch("/api/stripe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(cartItems),
+    });
+
+    const data = await res.json();
+    await stripe.redirectToCheckout({ sessionId: data.id });
+    console.log(data);
+  };
 
   return (
     <CartWrapper>
@@ -104,7 +115,7 @@ function Cart() {
               </div>
 
               <div className="btn-container">
-                <button type="button" className="btn">
+                <button type="button" className="btn" onClick={handleCheckout}>
                   Pay with Stripe
                 </button>
               </div>
