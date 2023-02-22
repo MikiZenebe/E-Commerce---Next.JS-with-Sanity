@@ -83,7 +83,7 @@ const ProductDetails = ({ products, product }) => {
                 className={
                   id === index ? "small-image selected-image" : "small-image"
                 }
-                key={item.id}
+                key={id}
                 src={urlFor(item)}
                 alt=""
                 onMouseEnter={() => setIndex(id)}

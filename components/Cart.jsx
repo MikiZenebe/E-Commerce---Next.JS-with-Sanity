@@ -38,8 +38,8 @@ function Cart() {
     });
 
     const data = await res.json();
+    toast.loading("Redirecting...");
     await stripe.redirectToCheckout({ sessionId: data.id });
-    console.log(data);
   };
 
   return (
