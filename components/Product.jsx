@@ -7,6 +7,7 @@ import { Main } from "../styles/ProductStyle";
 function Product({ product }) {
   //Extract the fields from the props
   const { image, name, slug, price } = product;
+
   return (
     <div>
       <Link href={`/product/${slug.current}`}>
