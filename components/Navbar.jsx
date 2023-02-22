@@ -12,6 +12,7 @@ function Navbar() {
       <p className="logo">
         <Link href="/">Electro Store</Link>
       </p>
+      <button>Account</button>
       <button type="button" onClick={() => setShowCart(true)}>
         {totalQuantity > 0 && <span>{totalQuantity}</span>}
         <AiOutlineShopping />
