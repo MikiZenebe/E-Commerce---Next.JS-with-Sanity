@@ -5,9 +5,12 @@ import { NavBar } from "../styles/HomeStyle";
 import { Cart } from "./";
 import { useStateContext } from "../context/StateContext";
 import User from "./User";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 function Navbar() {
   const { showCart, setShowCart, totalQuantity } = useStateContext();
+  const { user } = useUser();
+  console.log(user);
   return (
     <NavBar>
       <p className="logo">

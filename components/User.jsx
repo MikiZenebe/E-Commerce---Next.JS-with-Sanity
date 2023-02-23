@@ -2,6 +2,7 @@
 import { FaUserCircle } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Link from "next/link";
 
 export default function User() {
   const route = useRouter();
@@ -9,17 +10,17 @@ export default function User() {
 
   if (!user) {
     return (
-      <div onClick={() => route.push("/api/auth/login")}>
+      <Link href="/api/auth/login">
         <FaUserCircle />
         <h3>Profile</h3>
-      </div>
+      </Link>
     );
   }
 
   return (
     <div onClick={() => route.push("/profile")}>
-      <img src="" alt="" />
-      <h3>user name</h3>
+      <img src={user.picture} alt="" />
+      <h3>{user.name}</h3>
     </div>
   );
 }
